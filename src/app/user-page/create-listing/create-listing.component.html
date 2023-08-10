@@ -1,0 +1,167 @@
+<mat-spinner class="page-spinner" strokeWidth="4" [diameter]="80" *ngIf="showSpinner"></mat-spinner>
+
+<div class="d-flex flex-column flex-root" *ngIf="!showSpinner">
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid" id="kt_content">
+                    <div class="mt-5">
+                        <a class="px-5 cursor-pointer" (click)="goBack()">
+                            <span class="svg-icon svg-icon-2x svg-icon-gray-400">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                    <path
+                                        d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z"
+                                        fill="currentColor" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="d-flex row bg-white rounded p-5 m-5">
+                        <form class="form-wrapper m-auto" [formGroup]="createProduct">
+                            <h1 class="text-center">{{action}} a listing</h1>
+                            <div class="col d-flex justify-content-between">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Listing Title</mat-label>
+                                    <input type="text" matInput required formControlName="productName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col d-flex flex-2">
+                                <mat-form-field appearance="outline" class="w-50 pe-5">
+                                    <mat-label>Price</mat-label>
+                                    <input type="number" matInput required formControlName="price">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 ps-5">
+                                    <mat-label>Item type:</mat-label>
+                                    <mat-select matNativeControl required formControlName="itemType" #type [ngModel]
+                                        (ngModelChange)="onSelectedType($event)">
+                                        <mat-option *ngFor="let option of itemTypes"
+                                            [value]="option.value">{{option.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col d-flex flex-2" *ngIf="selectedType == '11'">
+                                <mat-form-field appearance="outline" class="w-50 pe-5">
+                                    <mat-label>Coral group:</mat-label>
+                                    <mat-select matNativeControl formControlName="groupId">
+                                        <mat-option *ngFor="let option of coralGroups"
+                                            [value]="option.value">{{option.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 ps-5">
+                                    <mat-label>Coral species</mat-label>
+                                    <mat-select matNativeControl formControlName="coralSpecies">
+                                        <mat-option *ngFor="let option of itemSpecies"
+                                            [value]="option.value">{{option.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col d-flex justify-content-between" *ngIf="selectedType == '11'">
+                                <mat-form-field appearance="outline" class="w-50 pe-5">
+                                    <mat-label>Flow:</mat-label>
+                                    <mat-select matNativeControl formControlName="flowIntensity">
+                                        <mat-option *ngFor="let option of flowIntensities"
+                                            [value]="option.value">{{option.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 ps-5">
+                                    <mat-label>Lighting:</mat-label>
+                                    <mat-select matNativeControl formControlName="lightingIntensity">
+                                        <mat-option *ngFor="let option of LightingIntensities"
+                                            [value]="option.value">{{option.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap">
+                                <mat-form-field appearance="outline" class="w-50 w-sm-20 pe-5 flex-column">
+                                    <mat-label>Alkalinity (dKH):</mat-label>
+                                    <input type="number" matInput min="3" max="15" step=".1"
+                                        formControlName="alkalinity" (keypress)="oneDecimalFilter($event)">
+                                    <mat-error *ngIf="createProduct.get('alkalinity').invalid">Please enter a number
+                                        between 3 and 15</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 w-sm-20 ps-5 flex-column">
+                                    <mat-label>Nitrate (ppm):</mat-label>
+                                    <input type="number" matInput min="0" max="100" step=".1" formControlName="nitrate"
+                                        (keypress)="oneDecimalFilter($event)">
+                                    <mat-error *ngIf="createProduct.get('nitrate').invalid">Please enter a number
+                                        between 0 and 100</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 w-sm-20 pe-5 flex-column">
+                                    <mat-label>Phosphate (ppm):</mat-label>
+                                    <input type="number" matInput min="0" max="10" step=".01"
+                                        formControlName="phosphate" (keypress)="twoDecimalFilter($event)">
+                                    <mat-error *ngIf="createProduct.get('phosphate').invalid">Please enter a number
+                                        between 0 and 10</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 w-sm-20 ps-5 flex-column">
+                                    <mat-label>Calcium (ppm):</mat-label>
+                                    <input type="number" matInput min="300" max="600" formControlName="calcium">
+                                    <mat-error *ngIf="createProduct.get('calcium').invalid">Please enter a number
+                                        between 300 and 600</mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 w-sm-20 pe-5 flex-column">
+                                    <mat-label>Magnesium (ppm):</mat-label>
+                                    <input type="number" matInput min="1200" max="1700" formControlName="magnesium">
+                                    <mat-error *ngIf="createProduct.get('magnesium').invalid">Please enter a number
+                                        between 1200 and 1700</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col d-flex justify-content-between" *ngIf="selectedType == '11'">
+                                <mat-form-field appearance="outline" class="w-50 pe-5">
+                                    <mat-label>Date frag was cut</mat-label>
+                                    <input matInput [matDatepicker]="doc" formControlName="ageOfFrag" [max]="maxDate"
+                                        (dateChange)="calculateTimeOfCut()">
+                                    <mat-datepicker-toggle matSuffix [for]="doc"></mat-datepicker-toggle>
+                                    <mat-datepicker #doc></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-50 ps-5">
+                                    <mat-label>How long ago was frag cut</mat-label>
+                                    <mat-select matNativeControl #frag formControlName="howLongCutoff">
+                                        <mat-option value="FRESH">Fresh (less than two weeks)</mat-option>
+                                        <mat-option value="NEW">New (two weeks to two months)</mat-option>
+                                        <mat-option value="SEASONED">Seasoned (two months +)</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col mb-20 mt-7">
+                                <ckeditor [editor]="editor" [config]="{ placeholder:'Description' }"
+                                    formControlName="description" [data]="data"></ckeditor>
+                                <span class="text-primary fw-semibold">*Make sure to add information so that prospective
+                                    buyers can contact you such as your phone number or email address.</span>
+                            </div>
+                            <div class="col d-flex justify-content-between ">
+                                <div class="w-100">
+                                    <div class="row">
+                                        <input type="file" formControlName="productImages" required
+                                            (change)="cropImage($event)" #imgFileInput style="display:none"><br>
+                                        <span
+                                            class="badge badge-light-primary flex-shrink-0 align-self-center p-2 fs-7 upload mt-1 ms-3 mb-8"
+                                            (click)="imgFileInput.click()">Upload Photos*
+                                            <mat-icon>uploads</mat-icon></span>
+                                    </div>
+                                    <div *ngFor='let url of images; let i = index'
+                                        class="position-relative inline-block row">
+                                        <div class="img-box card-rounded"
+                                            [ngStyle]="{'background-image': 'url(' + url + ')'}"></div>
+                                        <mat-icon class="position-absolute delete-icon"
+                                            (click)="this.images.splice(i, 1)">close</mat-icon>
+                                    </div>
+                                </div>
+                            </div>
+                                <button type="button" class="btn btn-primary text-center mt-9"
+                                    [disabled]="!createProduct.get('productName').value || !createProduct.get('price').value || images.length < 1 || isLoading"
+                                    (click)="postListing()">
+                                    <span *ngIf="!isLoading">Post listing</span>
+                                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-3" role="status" aria-hidden="true"></span>
+                                    <span *ngIf="isLoading">Posting...</span>
+                                </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

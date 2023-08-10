@@ -1,0 +1,78 @@
+<mat-spinner class="page-spinner" strokeWidth="4" [diameter]="80" *ngIf="showSpinner"></mat-spinner>
+
+<div class="d-flex flex-column flex-root" *ngIf="!showSpinner">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid" id="kt_content">
+                    <div class="mt-5">
+                        <a class="px-5 cursor-pointer" (click)="goBack()">
+                            <span class="svg-icon svg-icon-2x svg-icon-gray-400">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="d-flex row bg-white rounded p-5 m-5">
+                        <form class="form-wrapper m-auto" [formGroup]="profileForm">
+                            <div class="me-7 mb-4">
+                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                    <div *ngIf="isImgSelected" class="avatar"
+                                        [ngStyle]="{ 'background-image': 'url(' + imgPreviewSrc + ')'}">
+                                        <mat-icon class="position-absolute" (click)="imgFileInput.click()">edit
+                                        </mat-icon>
+                                        <input type="file" (change)="showAvatar($event)" #imgFileInput
+                                            style="display:none">
+                                    </div>
+                                    <div *ngIf="!isImgSelected" class="avatar"
+                                        style="background-image:url('../../assets/images/300-1.jpg')"  referrerpolicy="no-referrer" >
+                                        <mat-icon class="position-absolute" (click)="imgFileInput.click()">edit
+                                        </mat-icon>
+                                        <input type="file" (change)="showAvatar($event)" #imgFileInput
+                                            style="display:none">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-column flex-md-row d-flex justify-content-between flex-wrap">
+                                <mat-form-field appearance="outline" class="w-100 w-md-25">
+                                    <mat-label>First Name</mat-label>
+                                    <input type="text" matInput required id="firstName" formControlName="firstName">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100 w-md-25">
+                                    <mat-label>Last Name</mat-label>
+                                    <input type="text" matInput required id="lastName" formControlName="lastName">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100 w-md-25">
+                                    <mat-label>Post Code:</mat-label>
+                                    <input type="text" matInput required id="zipCode" formControlName="zipCode">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>About Yourself:</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="50" id="description" formControlName="description"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <input type="file" (change)="uploadImage($event)" #imgFileInput style="display:none"><br>
+                                    <span class="badge badge-light-primary flex-shrink-0 align-self-center p-2 fs-7 upload mt-1 ms-3 mb-8" (click)="imgFileInput.click()">Upload Photos* <mat-icon>uploads</mat-icon></span>
+                                </div>
+                                <div *ngFor='let url of photos; let i = index' class="col bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-200px card-rounded border photos position-relative" [ngStyle]="{ 'background-image': 'url(' + url + ')'}">
+                                    <mat-icon class="position-absolute delete-icon" (click)="this.photos.splice(i, 1)">close</mat-icon>
+                                </div>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary text-center mt-9" (click)="saveChanges()" [disabled]="profileForm.invalid">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

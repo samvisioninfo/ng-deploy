@@ -1,0 +1,40 @@
+<div class="w-100 sticky-top header-box">
+  <nav class="navbar navbar-expand m-2">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-3 active" [routerLink]="'/landing'">
+        <img src="../../assets/images/logo-no-background.svg" referrerpolicy="no-referrer" alt="logo" class="logo">
+      </a>
+        <ul *ngIf="!activeUser || !activeUser.memberId" class="navbar-nav mb-2 mb-lg-0 justify-content-end">
+          <li class="nav-item me-5">
+            <a class="btn btn-info nav-link fs-6 active" [routerLink]="'/auth/sign-up'">Sign-Up</a>
+          </li>
+          <li class="nav-item me-5">
+            <a class="btn btn-success nav-link fs-6 active" [routerLink]="'/auth/sign-in'">Sign-In</a>
+          </li>
+        </ul>
+        <ul *ngIf="activeUser && activeUser.memberId"
+          class="navbar-nav mb-2 mb-lg-0 justify-content-end d-flex align-items-center">
+          <li class="nav-item fs-5 me-2 active h-15px">Hi, </li>
+          <li class="nav-item fs-5 me-2 active h-15px">{{activeUser.firstName}}</li>
+          <li class="nav-item fs-5 me-5 active h-15px">{{activeUser.lastName}} </li>
+          <li class="nav-item w-50">
+            <div class="user-avatar" [style.background-image]="'url(' + activeUser.memberAvatar + ')'"
+              [matMenuTriggerFor]="menu"></div>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</div>
+<mat-menu #menu="matMenu">
+  <button *ngIf="activeUser && activeUser.memberId" mat-menu-item [routerLink]="'../user'"
+    [queryParams]="{memberId: activeUser.memberId, activeTab: 0}" (click)="showMyAccount()">
+    <div class="box">
+      <h3>Account Settings</h3>
+    </div>
+  </button>
+  <button *ngIf="activeUser && activeUser.memberId" mat-menu-item>
+    <div class="box">
+      <h3 (click)="logOut()">Sign Out</h3>
+    </div>
+  </button>
+</mat-menu>

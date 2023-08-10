@@ -1,0 +1,35 @@
+.box {
+    padding: 10px;
+    cursor: pointer;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+img:hover {
+    cursor: pointer;
+}
+.header-box{
+  background: #fff;
+  position: relative;
+
+  .user-avatar{
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .logo{
+    max-width: 100px;
+  }
+}
+
+.navbar {
+  margin: 0 !important;
+  height: 55px !important;
+}

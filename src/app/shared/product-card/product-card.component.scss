@@ -1,0 +1,52 @@
+.listing-img {
+    &:hover mat-icon {
+        display: flex;
+    }
+    mat-icon {
+        background-color: rgba(255,255,255,0.5);
+        margin-bottom:10px;
+        cursor: pointer;
+        display: none;
+    }
+}
+
+.flex-dir-row {
+  flex-direction: row !important;
+}
+
+.product-title {
+    color: #CD4140!important;
+  }
+
+.chat-icon {
+  color: #50cd89;
+  position: relative;
+  top: 2px;
+  right: 5px;
+  cursor: pointer;
+}
+.user-edit-btn{
+  min-width: 120px;
+  padding: 10px 5px !important;
+
+  mat-icon{
+    position: relative;
+    font-size: 16px;
+    top: 4px;
+  }
+}
+.dropdown-content { 
+  display: none; 
+} 
+ 
+.dropdown-button:hover + .dropdown-content { 
+  display: block; 
+} 
+.common-button {
+  border-radius: 4px;
+  line-height: 2.5;
+}
+
+.cp {
+  cursor: pointer;
+}

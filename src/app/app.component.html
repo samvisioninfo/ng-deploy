@@ -1,0 +1,13 @@
+<app-header *ngIf="showHeader"></app-header>
+<div [ngClass]="showHeader ? 'content' : 'content-full'" #scrollable>
+  <div [ngClass]="showHeader ? 'content-page' : 'content-page-full'">
+    <router-outlet></router-outlet>
+    <app-splash></app-splash>
+  </div>
+
+  <app-footer *ngIf="showHeader"></app-footer>
+</div>
+
+<div class="right-panel" [@rightPanel]="rightPanelSection">
+  <app-chat-sidebar [product]="chatProduct"></app-chat-sidebar>
+</div>

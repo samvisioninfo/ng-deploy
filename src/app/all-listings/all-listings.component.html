@@ -1,0 +1,80 @@
+<div class="d-flex flex-row-fluid flex-root bg-white">
+
+    <!--begin::Page-->
+    <div class="page d-flex flex-column flex-column-fluid">
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-row-fluid" id="kt_wrapper">
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid " id="kt_content">
+                  <h1 class="ms-4 ps-4 d-block d-sm-none fs-1">Filters</h1>
+                    <form class="row row-cols-2 row-cols-lg-6 g-5 g-xl-10 mb-5 mt-5 mb-xl-10 ps-7 pe-12 filter-holder justify-content-between" [formGroup]="filterGroup">
+                      <mat-form-field appearance="outline" class="col">
+                        <mat-label>Coral group</mat-label>
+                        <mat-select matNativeControl formControlName="groupId" disableOptionCentering>
+                          <mat-option *ngFor="let option of coralGroups" [value]="option.value">{{option.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field  appearance="outline" class="col">
+                        <mat-label>Coral Species</mat-label>
+                        <mat-select formControlName="category" disableOptionCentering>
+                          <mat-option *ngFor="let x of itemSpecies" [value]="x.value">{{x.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field  appearance="outline" class="col">
+                          <mat-label>State</mat-label>
+                          <mat-select formControlName="state" disableOptionCentering>
+                            <mat-option *ngFor="let x of itemStates" [value]="x.name">{{x.name}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-form-field  appearance="outline" class="col">
+                        <mat-label>Sort by Age/Price</mat-label>
+                        <mat-select formControlName="sort" disableOptionCentering>
+                          <mat-option value="order_new">New - Old</mat-option>
+                          <mat-option value="order_old">Old - New</mat-option>
+                          <mat-option value="price_high_low">Descending prices</mat-option>
+                          <mat-option value="price_low_high">Ascending prices</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <span class="badge badge-light-primary col p-2 fs-5 reset justify-content-center mt-0" (click)="resetFilters()">Reset</span>
+                    </form>
+
+                    <mat-spinner class="page-spinner" strokeWidth="4" [diameter]="80" *ngIf="showPageSpinner"></mat-spinner>
+
+                    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                        <!--begin::Col-->
+                        <div class="col-xl-12">
+                            <!--begin::Player widget 1-->
+                            <div class="card card-flush h-xl-100">
+                                <div class="card-body pt-7">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                      <h1 class="fs-1 text-center">All listings</h1>
+                                      <!-- <p class="fs-6 text-center lh-1">by date (latest first)</p> -->
+                                    </div>
+
+                                    <div class="row g-5 g-xl-9 mb-5 mb-xl-9 pb-5 mt-5">
+                                        <div class="col-12 col-sm-6 col-lg-3 mb-3 mb-sm-0" *ngFor="let card of productList">
+                                            <div class="m-0">
+                                                <div class="card-rounded position-relative mb-5">
+                                                    <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded" [ngStyle]="{ 'background-image': 'url(' + card.productImages[0] + ')'}"></div>
+                                                </div>
+                                                <div class="m-0 d-inline-block w-75">
+                                                  <a [routerLink]="'/user/listing-details'" [queryParams]="{productId: card.productId}" class="text-gray-800 product-title fs-3 fw-bold d-block mb-2">{{card.productName}}</a>
+                                                  <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">{{card.member.memberName}}, {{card.member.rating| number : '1.2-2'}}★ {{card.member.numberOfRatings ? '(' + card.member.numberOfRatings + ')' : '' }}</span>
+                                                  <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Price: ${{card.price}}</span>
+                                                  <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">State: {{card.stateCode}}, {{card.zipCode}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-paginator *ngIf="productList && productList.length > 0" [length]="totalCount" [pageSize]="pageSize" (page)="paginatorChanged($event)" [pageSizeOptions]="paginatorOptions" aria-label="Select page"></mat-paginator>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

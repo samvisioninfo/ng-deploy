@@ -1,0 +1,82 @@
+.reset {
+    height: 50px;
+    width: 200px;
+    cursor: pointer;
+}
+
+.price-range {
+  max-width: 250px !important;
+  margin: 0 !important;
+  position: relative;
+  top: 15px;
+}
+
+.range-label {
+  position: relative;
+  top: 25px;
+  left: 100px;
+  color: gray;
+}
+
+.p-relative {
+  position: relative;
+}
+
+::ng-deep {
+  .ngx-slider .ngx-slider-pointer {
+    width: 15px !important;
+    height: 15px !important;
+    top: -5px !important;
+  }
+
+  .ngx-slider .ngx-slider-pointer:after {
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .ngx-slider .ngx-slider-bubble {
+    font-size: 10px !important;
+  }
+}
+
+.product-title {
+  color: #CD4140 !important;
+}
+.page-spinner {
+  position: relative;
+  left: calc(50% - 40px);
+}
+
+mat-label {
+  text-transform: initial !important;
+}
+
+.col-auto {
+  width: 20% !important;
+}
+
+.filter-holder {
+  flex-wrap: nowrap !important;
+}
+@media(max-width: 991px) {
+  .filter-holder {
+    flex-wrap: wrap !important;
+  }
+
+  .badge {
+    width: 100%;
+  }
+}
+
+.page {
+  max-width: 100% !important;
+}
+
+.product-title {
+  color: #CD4140 !important;
+  cursor: pointer;
+}
+
+mat-form-field {
+  margin-top: 0 !important;
+}

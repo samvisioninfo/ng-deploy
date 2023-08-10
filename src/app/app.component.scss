@@ -1,0 +1,35 @@
+.content {
+  height: calc(100% - 55px) !important;
+  min-height: 300px;
+  overflow-y: auto;
+}
+
+.content-full {
+  height: 100% !important;
+  min-height: 300px;
+  overflow-y: auto;
+}
+
+app-footer {
+  height: 90px !important;
+}
+
+.content-page {
+  min-height: 100%;
+  // height: 100%;
+}
+
+.content-page-full {
+  min-height: 100%;
+  height: 100%;
+}
+
+
+.right-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+}
+

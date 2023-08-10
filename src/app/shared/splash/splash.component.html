@@ -1,0 +1,16 @@
+<div *ngIf="showSplash" class="app-splash-screen"
+[ngStyle]="{'opacity': opacityChange, 'transition': splashTransition}">
+  <div class="app-splash-content">
+    <div class="loader">
+      <div class="loader__bar"></div>
+      <div class="loader__bar"></div>
+      <div class="loader__bar"></div>
+      <div class="loader__bar"></div>
+      <div class="loader__bar"></div>
+      <div class="loader__ball"></div>
+    </div>
+    <div class="loader-message">
+      <h2 class="text-white">Loading...</h2>
+    </div>
+  </div>
+</div>

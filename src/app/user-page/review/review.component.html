@@ -1,0 +1,27 @@
+<div class="content flex-row-fluid" id="kt_content">
+    <div class="mt-5">
+        <a class="px-5 cursor-pointer" (click)="closeDialog()">
+            <span class="svg-icon svg-icon-2x svg-icon-gray-400">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                </svg>
+            </span>
+        </a>
+    </div>
+    <div class="d-flex row bg-white rounded mt-0 h-350px">
+        <form class="form-wrapper m-auto" [formGroup]="postReview">
+            <h1 class="text-center">Add a review</h1>
+            <div class="col d-flex flex-column justify-content-between mt-6">
+                <div class="stars d-flex align-items-center my-5">
+                    <ngx-star-rating formControlName="ratingValue" [id]="'rating'"></ngx-star-rating>
+                </div>
+                <mat-form-field appearance="outline" class="pe-5">
+                    <mat-label>Add a review</mat-label>
+                    <textarea type="text" rows="8" matInput required formControlName="feedbackMessage"></textarea>
+                </mat-form-field>
+            </div>
+            <button type="button" class="btn btn-success float-end d-inline-block mt-5" (click)="leaveReview()">Leave a review</button>
+        </form>
+    </div>
+</div>

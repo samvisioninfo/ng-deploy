@@ -1,0 +1,85 @@
+
+.back {
+    width: 80px;
+    display: block;
+    cursor: pointer;
+    mat-icon {
+        left: 0px;
+        bottom: 0px;
+    }
+}
+.form-wrapper {
+    width: 800px;
+    .img-box {
+        height: 120px;
+        width: 120px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-left: 10px;
+        margin-right: 14px;
+    }
+    .delete-icon {
+        left: 95px;
+        top: 5px;
+        color: #E7E9EB;
+        cursor: pointer;
+    }
+    button {
+        float: right;
+    }
+    .upload {
+        cursor: pointer;
+        width: 120px;
+    }
+}
+
+#kt_content_container{
+  mat-label{
+    text-transform: capitalize !important;
+  }
+}
+
+::ng-deep {
+  .ck-toolbar_grouping {
+    display: none !important;
+  }
+
+  .ck-rounded-corners {
+    border-radius: 5px !important;
+    border-color: #dedede !important;
+    min-height: 100px !important;
+  }
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+@media(min-width: 991px) {
+  .w-sm-20 {
+    width: 20% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    &:nth-child(1) {
+      padding: 0px !important;
+    }
+    &:nth-child(3) {
+      padding: 0px !important;
+    }
+    &:nth-child(5) {
+      padding: 0px !important;
+    }
+  }
+}
+
+.mt-7 {
+  margin-top: 7px;
+}
+
+.page-spinner {
+  position: relative;
+  left: calc(50% - 40px);
+  top: 100px;
+}
+

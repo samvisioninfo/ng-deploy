@@ -1,0 +1,229 @@
+
+<div class="d-flex flex-column flex-root content-holder">
+  <mat-spinner class="page-spinner" strokeWidth="4" [diameter]="80" *ngIf="showPageSpinner"></mat-spinner>
+
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid d-flex flex-column" id="kt_content">
+                    <div class="card mb-5 mb-xxl-8 d-flex flex-col flex-xl-row">
+                        <div class="card-body pt-9 pb-0 col-xl-6">
+                            <div class="d-flex">
+                                <div class="me-7 mb-4">
+                                    <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                        <div [ngStyle]="{ 'background-image': 'url(' + user.memberAvatar + ')'}" referrerpolicy="no-referrer" class="avatar">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                    <div class="d-flex flex-column">
+                                        <div class="d-flex flex-row flex-wrap flex-md-nowrap align-items-center mb-2">
+                                            <p class="text-gray-900 fs-2 fw-bold me-1 mt-3 w-100 w-md-50">{{user.firstName}} {{user.lastName}} <br> <span class="text-muted fw-semibold d-block fs-4 mt-3">{{userRating}} ★ ({{user.numberOfRatings}})</span></p>
+                                            <button *ngIf="isOwnerProfile"
+                                            [routerLink]="'/user/edit-profile'"
+                                              class="btn btn-sm fw-bold btn-primary user-edit-btn w-100 w-md-50">
+                                              Edit profile <mat-icon class="">edit</mat-icon>
+                                            </button>
+                                        </div>
+                                        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                                            <div class="flex-row flex-sm-column">
+                                                <p class="d-flex align-items-center text-400 me-5 mb-2">Member since</p>
+                                                <p class="d-flex align-items-center text-400 me-5 mb-2 mt-0 mt-sm-4">{{user.dateCreated | date: 'yyyy-MM-dd'}}</p>
+                                            </div>
+                                            <div class="flex-row flex-sm-column align-items-end">
+                                                <span class="badge badge-light-success p-2 fs-7 mx-0 mx-sm-3">sold:</span>
+                                                <span class="badge badge-light-success p-2 fs-7 text-dark">{{user.sold}}</span><br>
+                                                <span class="badge badge-light-warning p-2 fs-7 mt-2 mx-0 mx-sm-3">bought:</span>
+                                                <span class="badge badge-light-warning p-2 fs-7 text-dark">{{user.bought}}</span>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-description position-relative">
+                                <p class="d-flex align-items-center text-400 me-5 mb-2 mt-5">{{user.description}}</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 p-5 m-4 me-7" *ngIf="user.images">
+                            <div *ngIf="user.images.length == 1">
+                                <div (click)="openDialog(0)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-400px w-100 card-rounded" [ngStyle]="{ 'background-image': 'url(' + user.images[0] + ')'}"></div>
+                            </div>
+                            <div *ngIf="user.images.length == 2" class="row">
+                                <div (click)="openDialog(0)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-400px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[0] + ')'}"></div>
+                                <div (click)="openDialog(1)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-400px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[1] + ')'}"></div>
+                            </div>
+                            <div *ngIf="user.images.length == 3" class="row">
+                                <div (click)="openDialog(0)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-400px w-50 card-rounded" [ngStyle]="{ 'background-image': 'url(' + user.images[0] + ')'}"></div>
+                                <div class="col">
+                                    <div (click)="openDialog(1)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-100 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[1] + ')'}"></div>
+                                    <div (click)="openDialog(2)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-100 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[2] + ')'}"></div>
+                                </div>
+                            </div>
+                            <div *ngIf="user.images.length == 4" class="col">
+                                <div class="row">
+                                    <div (click)="openDialog(0)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[0] + ')'}"></div>
+                                    <div (click)="openDialog(1)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[1] + ')'}"></div>
+                                </div>
+                                <div class="row">
+                                    <div (click)="openDialog(2)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[2] + ')'}"></div>
+                                    <div (click)="openDialog(3)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[3] + ')'}"></div>
+                                </div>
+                            </div>
+                            <div *ngIf="user.images.length > 4" class="col">
+                                <div class="row">
+                                    <div (click)="openDialog(0)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[0] + ')'}"></div>
+                                    <div (click)="openDialog(1)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[1] + ')'}"></div>
+                                </div>
+                                <div class="row">
+                                    <div (click)="openDialog(2)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[2] + ')'}"></div>
+                                    <div (click)="openDialog(3)" class="user-img bgi-position-center bgi-no-repeat bgi-size-cover h-200px w-50 card-rounded border" [ngStyle]="{ 'background-image': 'url(' + user.images[3] + ')'}">
+                                        <div class="image-overlay">+ {{user.images.length - 4}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid" id="kt_content">
+                    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                        <!--begin::Col-->
+                        <div class="col-xl-12">
+                            <!--begin::Player widget 1-->
+                            <div class="card card-flush h-xl-100 mat-tab-wrapper">
+                                <mat-tab-group class="w-100" (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="tabIndex">
+                                    <mat-tab label="Current Listings">
+                                        <div *ngIf="listingEmpty" class="empty-data-box">
+                                          <mat-icon class="empty-data-icon">inventory_2</mat-icon>
+                                          <p class="empty-data-title">No products are found</p>
+                                          <p class="empty-data-subtitle">at this time</p>
+                                        </div>
+
+                                        <!--begin::Card body -->
+                                        <div [style.display]="!listingEmpty ? 'block' : 'none'" class="card-body pt-7">
+                                            <div class="row g-5 g-xl-9 mb-5 mb-xl-9 pb-5">
+                                                <div class="col-12 col-sm-6 col-lg-3 mb-3 mb-sm-0" *ngFor="let p of product">
+                                                    <app-product-card [product]="p" [showActions]="isOwnerProfile"></app-product-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <mat-tab label="Previous Reviews" *ngIf="isOwnerProfile">
+                                      <div *ngIf="reviewEmpty" class="empty-data-box">
+                                        <mat-icon class="empty-data-icon">reviews</mat-icon>
+                                        <p class="empty-data-title">No reviews are found</p>
+                                        <p class="empty-data-subtitle">at this time</p>
+                                      </div>
+
+                                        <div [style.display]="!reviewEmpty ? 'flex' : 'none'" class="flex-row">
+                                            <div class="card-body pt-7">
+                                                <div class="row g-5 g-xl-9 mb-5 pb-5 mb-xl-9">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0" *ngFor="let review of reviewsList">
+                                                        <div class="row m-0">
+                                                            <div class="col-xl-6">
+                                                                <div class="card-rounded position-relative mb-5">
+                                                                    <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
+                                                                        style="background-image:url({{review.product.productImages[0]}})">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="m-0">
+                                                                    <a [routerLink]="'/user/listing-details'" [queryParams]="{productId: review.product.productId}" class="text-gray-800 product-title fs-3 fw-bold d-block mb-2">{{review.product.productName}}</a>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Flow Intensity: {{review.product.flowIntensityName}}</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">State: {{review.product.stateCode}}</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Price: ${{review.product.price}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-6 my-5 py-5">
+                                                                <div class="btn-group me-5 w-45px h-45px d-inline-block bgi-position-center bgi-no-repeat bgi-size-cover" style="background-image:url({{review.memberDetails.memberAvatar}})"></div>
+                                                                <span class="fw-bold fs-6 text-400 lh-1 d-inline-block">{{review.memberDetails.memberName}}</span>
+                                                                <span class="fw-bold fs-6 text-400 d-block lh-1 mt-5 pt-5">Sold on {{review.dateCreated | date: 'yyyy-MM-dd'}}</span>
+                                                                <span *ngIf="review.ratingValue > 4.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★★★</span>
+                                                                <span *ngIf="review.ratingValue > 3.5 && review.ratingValue < 4.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★★☆</span>
+                                                                <span *ngIf="review.ratingValue > 2.5 && review.ratingValue < 3.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★☆☆</span>
+                                                                <span *ngIf="review.ratingValue > 1.5 && review.ratingValue < 2.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★☆☆☆</span>
+                                                                <span *ngIf="review.ratingValue > 0 && review.ratingValue < 1.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★☆☆☆☆</span>
+                                                                <span class="fw-bold fs-6 text-400 d-block lh-1 mt-5">"{{review.feedbackMessage}}"</span>
+
+                                                                <!-- <div class="contact-user-btn badge badge-light-primary" (click)="onViewRightPanel(review.product)"><mat-icon>forum</mat-icon> Contact Customer</div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <mat-tab label="My Purchases" *ngIf="isOwnerProfile">
+                                      <div *ngIf="purachaseEmpty" class="empty-data-box">
+                                        <mat-icon class="empty-data-icon">local_mall</mat-icon>
+                                        <p class="empty-data-title">No purchases are found</p>
+                                        <p class="empty-data-subtitle">at this time</p>
+                                      </div>
+
+                                        <div [style.display]="!purachaseEmpty ? 'flex' : 'none'" class="flex-row">
+                                            <div class="card-body pt-7">
+                                                <div class="row g-5 g-xl-9 mb-5 pb-5 mb-xl-9">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0" *ngFor="let purchase of purchases">
+                                                        <div class="row m-0">
+                                                            <div class="col-xl-6">
+                                                                <div class="card-rounded position-relative mb-5">
+                                                                    <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded"
+                                                                    [style.background-image]="'url(' + purchase.product.productImages[0] + ')'">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="m-0">
+                                                                    <a [routerLink]="'/user/listing-details'" [queryParams]="{productId: purchase.product.productId}" class="text-gray-800 product-title fs-3 fw-bold d-block mb-2">{{purchase.product.productName}}</a>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3" *ngIf="purchase.product.howLongCutoff == 0">Fresh</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3" *ngIf="purchase.product.howLongCutoff == 1">New</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3" *ngIf="purchase.product.howLongCutoff == 2">Seasoned</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Flow Intensity: {{purchase.product.flowIntensityName}}</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">State: {{purchase.product.stateCode}}</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Price: ${{purchase.product.price}}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-6 my-5 py-5">
+                                                                <div *ngIf="!purchase.ratingValue" class="d-flex justify-content-center align-items-center">
+                                                                    <button (click)="dialogReview()" class="btn btn-light fs-3 w-100">No reviews, leave one</button>
+                                                                </div>
+                                                                <div *ngIf="purchase.ratingValue">
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-5 pt-5">Purchased on {{purchase.dateCreated | date:'yyyy-MM-dd'}}</span>
+                                                                    <span *ngIf="purchase.ratingValue > 4.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★★★</span>
+                                                                    <span *ngIf="purchase.ratingValue > 3.5 && purchase.ratingValue < 4.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★★☆</span>
+                                                                    <span *ngIf="purchase.ratingValue > 2.5 && purchase.ratingValue < 3.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★★☆☆</span>
+                                                                    <span *ngIf="purchase.ratingValue > 1.5 && purchase.ratingValue < 2.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★★☆☆☆</span>
+                                                                    <span *ngIf="purchase.ratingValue > 0 && purchase.ratingValue < 1.5" class="fw-bold fs-6 text-400 d-block lh-1 mt-5">★☆☆☆☆</span>
+                                                                    <span class="fw-bold fs-6 text-400 d-block lh-1 mt-5">"{{purchase.feedbackMessage}}"</span>
+                                                                </div>
+                                                                <!-- <div class="contact-user-btn badge badge-light-primary" (click)="onViewRightPanel(purchase.product)"><mat-icon>forum</mat-icon> Contact Seller</div> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                    <mat-tab disabled *ngIf="isOwnerProfile">
+                                        <ng-template mat-tab-label>
+                                            <button mat-icon-button [routerLink]="'/user/create-listing'">
+                                                <mat-icon>add_circle</mat-icon>
+                                                Add Listing
+                                            </button>
+                                        </ng-template>
+                                    </mat-tab>
+                                </mat-tab-group>
+                            </div>
+                            <!--end::Player widget 1-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

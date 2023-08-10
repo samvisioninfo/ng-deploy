@@ -1,0 +1,69 @@
+<div class="custom-spinner-wrapper" *ngIf="is_loading_results">
+  <mat-spinner strokeWidth="1" [diameter]="65"></mat-spinner>
+</div>
+
+<div class="image-cropper-dialog-wrapper">
+
+  <mat-toolbar>
+    <mat-toolbar-row class="container-fluid">
+
+      <div class="col-10 col-sm-10">
+        <h4 class="title"> Crop image </h4>
+      </div>
+
+      <div class="col-2 col-sm-2 text-end">
+        <button mat-icon-button class="close-dialog-button" matTooltip="Close dialog"
+          (click)="_matDialogRef.close({result: false, data: null})">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-dialog-content>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+
+      <div fxFlex="50">
+        <image-cropper class="m-auto" [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="main_tain_aspect_ratio" [aspectRatio]="aspect_ratio" [resizeToWidth]="resize_to_width"
+          [resizeToHeight]="resize_to_height" [roundCropper]="round_cropper" format="png"
+          (imageCropped)="imageCropped($event)">
+        </image-cropper>
+      </div>
+
+      <div fxFlex="45" fxFlexOffset="5" class="border1 p-1 m-auto ">
+        <img [src]="cropped_image" alt="Cropped Image" class="cropped-image" />
+      </div>
+
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start start" class="pt-2">
+
+      <p fxFlex="50">
+        <b>Important quidlines:</b>
+        Accepted image formats: .jpg, .jpeg, .gif or .png.
+      </p>
+
+      <div fxFlex="50">
+
+        <div fxLayout="row wrap" fxLayoutAlign="start start">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <div mat-dialog-actions align="end">
+
+    <button mat-raised-button color="primary" (click)="saveImage()">
+      Save
+    </button>
+
+  </div>
+
+</div>

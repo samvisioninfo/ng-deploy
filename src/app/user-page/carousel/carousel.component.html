@@ -1,0 +1,11 @@
+<div class="carousel-wrapper position-relative">
+    <mat-icon (click)="closeCarousel()" class="position-absolute z-1 close">close</mat-icon>
+    <ngu-carousel #myCarousel [inputs]="carouselTile" [dataSource]="carouselTileItems">
+        <ngu-tile *nguCarouselDef="let item; let j = index">
+            <div class="tile" [style.background]="'url(' + item + ')'"></div>
+        </ngu-tile>
+        <button NguCarouselPrev class="leftRs" *ngIf="carouselTileItems.length > 1" [style.opacity]="myCarousel.isFirst ? 0.5:1"><mat-icon>chevron_left</mat-icon></button>
+        <button NguCarouselNext class="rightRs" *ngIf="carouselTileItems.length > 1" [style.opacity]="myCarousel.isLast ? 0.5:1"><mat-icon>chevron_right</mat-icon></button>
+    </ngu-carousel>
+</div>
+

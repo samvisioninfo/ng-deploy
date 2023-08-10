@@ -1,0 +1,41 @@
+<div class="m-0">
+    <div class="card-rounded position-relative mb-5">
+        <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-200px card-rounded d-flex justify-content-end listing-img"
+            [style.background-image]="'url(' + product.productImages[0] + ')'">
+        </div>
+    </div>
+    <div class="m-0 d-inline-block w-75">
+        <a [routerLink]="'/user/listing-details'" [queryParams]="{productId: product.productId}"
+            class="text-gray-800 product-title fs-3 fw-bold d-block mb-2">{{product.productName}}</a>
+        <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">{{product.howLongCutoff}}</span>
+        <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Flow Intensity: {{product.flowIntensity}}</span>
+        <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">State: {{product.stateCode}}, {{product.zipCode}}</span>
+        <span class="fw-bold fs-6 text-400 d-block lh-1 mt-3">Price: ${{product.price}}</span>
+    </div>
+    <div class="d-inline-block w-25">
+        <div class="mat-icons d-flex flex-dir-row flex-column justify-content-center align-items-end"
+            *ngIf="showActions">
+            <!-- <mat-icon class="chat-icon" *ngIf="product.hasMessage" (click)="onViewRightPanel(product)">chat</mat-icon> -->
+            <mat-icon [routerLink]="'/user/create-listing'" [queryParams]="{productId: product.productId}"
+                style="color: lightskyblue;" class="cursor-pointer">edit</mat-icon>
+            <mat-icon (click)="deleteProduct(product.productId)" class="cursor-pointer"
+                style="color: #CD4140;">delete</mat-icon>
+        </div>
+    </div>
+    <div class="m-0 d-inline-block w-50">
+        <button class="btn btn-sm btn-info user-edit-btn fs-4 text-400 d-block lh-1 mt-3">
+            {{product.status}}
+        </button>
+    </div>
+    <div *ngIf="showActions" class="d-inline-block w-25" [matMenuTriggerFor]="theMenu">
+        <mat-menu #theMenu="matMenu">
+            <button mat-menu-item *ngFor="let option of showStatus" (click)="onMenuItemClick(option)"
+                [value]="option.name">{{option.name}}</button>
+        </mat-menu>
+        <mat-icon class="cp">edit</mat-icon>
+    </div>
+    <div class="m-0 d-inline-block w-25" *ngIf="showSaveButton">
+        <button type="button" class="btn btn-primary fs-4 text-400 d-block lh-1 mt-3"
+            (click)="saveChangedStatus()">Save</button>
+    </div>
+</div>
